@@ -10,6 +10,9 @@ public class Game {
     me = 4,
             siblings = 5;
 
+    public int character;
+    public int day;
+
     public Game(){
         factions = new Faction[6];
         factions[parents] = new Faction("Parents");
@@ -20,7 +23,10 @@ public class Game {
         factions[siblings] = new Faction("Siblings");
         Parser p = new Parser();
         p.parse(this);
+        this.character = 500;
+        this.day = 1;
     }
+
 
     public static void main(String[] args) {
         Game g = new Game();
