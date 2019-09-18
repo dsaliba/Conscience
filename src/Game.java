@@ -29,7 +29,8 @@ public class Game {
 
 
     public static void main(String[] args) {
+        mainFrame f = new mainFrame();
         Game g = new Game();
-        new mainFrame();
+
     }
 }

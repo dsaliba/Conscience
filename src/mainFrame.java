@@ -7,7 +7,7 @@ public class mainFrame extends Frame implements MouseListener{
         setSize(300,300);
         setLayout(null);
         setVisible(true);
-
+        System.out.println("FRAMEEEE");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent e) {
                 System.exit(0);
