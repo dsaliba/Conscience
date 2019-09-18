@@ -1,10 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.swing.*;
+
 public class mainFrame extends Frame implements MouseListener{
     mainFrame(){
         addMouseListener(this);
 
-        setSize(300,300);
+        setSize(1200,1000);
         setLayout(null);
         setVisible(true);
         System.out.println("FRAMEEEE");
@@ -13,6 +15,10 @@ public class mainFrame extends Frame implements MouseListener{
                 System.exit(0);
             }
         });
+
+        JButton b = new JButton("Submit");
+        b.setBounds(50, 150, 100, 30);
+        f.add(b);
     }
 
 
