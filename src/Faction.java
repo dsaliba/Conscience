@@ -28,8 +28,17 @@ public class Faction {
         return q;
     }
 
+    public int getIncome(){
+        if (this.score < 3) {
+            return -5 * (3-this.score);
+        }else if (this.score > 10){
+            return 5 * (this.score -10);
+        }
+        return 0;
+    }
+
     public void changeScore(int s) {
         this.score += s;
-        this.score = this.score < 0? 0:this.score > 10?10: this.score;
+        this.score = this.score < 0? 0:this.score > 20?20: this.score;
     }
 }
