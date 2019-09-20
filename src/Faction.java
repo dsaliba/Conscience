@@ -6,12 +6,14 @@ public class Faction {
     public ArrayList<Question> questions;
     public ArrayList<Question> used;
     public int score;
+    public int ind;
 
-    public Faction(String name) {
+    public Faction(String name, int ind) {
         this.name = name;
         this.questions = new ArrayList<>();
         this.used = new ArrayList<>();
         this.score = 5;
+        this.ind = ind;
     }
 
     public Question getQuestion(){
@@ -41,4 +43,47 @@ public class Faction {
         this.score += s;
         this.score = this.score < 0? 0:this.score > 20?20: this.score;
     }
+
+    public Question getDeathQuestion() {
+        String o1 = "";
+        String o2 = "";
+        String q = "";
+        int [] o1N = new int[] {0, 0, 0, 0, 0, 0};
+        int [] o2N = new int[] {0, 0, 0, 0, 0, 0};
+        o1N[this.ind] = 3;
+        switch(this.name){
+            case "Parents":
+                o1 = "";
+                o2 = "";
+                q = "";
+                break;
+            case "Friends":
+                o1 = "";
+                o2 = "";
+                q = "";
+                break;
+            case "Teachers":
+                o1 = "";
+                o2 = "";
+                q = "";
+                break;
+            case "Peers":
+                o1 = "";
+                o2 = "";
+                q = "";
+                break;
+            case "Me":
+                o1 = "";
+                o2 = "";
+                q = "";
+                break;
+            case "Sibilings":
+                o1 = "";
+                o2 = "";
+                q = "";
+                break;
+        }
+        return new Question(this.name, q, o1, o2, o1N, o2N, 50, 0);
+    }
+
 }

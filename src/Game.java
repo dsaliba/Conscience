@@ -15,12 +15,12 @@ public class Game {
 
     public Game(){
         factions = new Faction[6];
-        factions[parents] = new Faction("Parents");
-        factions[friends] = new Faction("Friends");
-        factions[teachers] = new Faction("Teachers");
-        factions[peers] = new Faction("Peers");
-        factions[me] = new Faction("Me");
-        factions[siblings] = new Faction("Siblings");
+        factions[parents] = new Faction("Parents", 0);
+        factions[friends] = new Faction("Friends", 1);
+        factions[teachers] = new Faction("Teachers", 2);
+        factions[peers] = new Faction("Peers", 3);
+        factions[me] = new Faction("Me",4);
+        factions[siblings] = new Faction("Siblings", 5);
         Parser p = new Parser();
         p.parse(this);
         this.character = 500;
