@@ -3,7 +3,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class mainFrame extends Frame {
-    mainFrame() {
+    Game g;
+    questionFrame qF;
+    mainFrame(Game g) {
+        this.g = g;
+        qF  = new questionFrame(this.g);
 
 
         setSize(1800, 1000);
@@ -20,7 +24,7 @@ public class mainFrame extends Frame {
 
     }
 
-    public static void addElements() {
+    public void addElements() {
         JButton parents = new JButton("Parents");
         JButton friends = new JButton("Friends");
         JButton siblings = new JButton("Siblings");
@@ -45,24 +49,24 @@ public class mainFrame extends Frame {
 
         parents.setBounds(490, 540, 100, 100);
         friends.setBounds(790, 540, 100, 100);
-        siblings.setBounds(1090, 540, 100, 100);
-        teachers.setBounds(490, 750, 100, 100);
-        coworkers.setBounds(790, 750, 100, 100);
-        yourself.setBounds(1090, 750, 100, 100);
+        teachers.setBounds(1090, 540, 100, 100);
+        coworkers.setBounds(490, 750, 100, 100);
+        yourself.setBounds(790, 750, 100, 100);
+        siblings.setBounds(1090, 750, 100, 100);
 
         parentsBar.setBounds(490, 660, 100, 30);
         friendsBar.setBounds(790, 660, 100, 30);
-        siblingsBar.setBounds(1090, 660, 100, 30);
-        teachersBar.setBounds(490, 870, 100, 30);
-        coworkersBar.setBounds(790, 870, 100, 30);
-        yourselfBar.setBounds(1090, 870, 100, 30);
+        teachersBar.setBounds(1090, 660, 100, 30);
+        coworkersBar.setBounds(490, 870, 100, 30);
+        yourselfBar.setBounds(790, 870, 100, 30);
+        siblingsBar.setBounds(1090, 870, 100, 30);
 
         parentsBar2.setBounds(490, 700, 100, 30);
         friendsBar2.setBounds(790, 700, 100, 30);
-        siblingsBar2.setBounds(1090, 700, 100, 30);
-        teachersBar2.setBounds(490, 910, 100, 30);
-        coworkersBar2.setBounds(790, 910, 100, 30);
-        yourselfBar2.setBounds(1090, 910, 100, 30);
+        teachersBar2.setBounds(1090, 700, 100, 30);
+        coworkersBar2.setBounds(490, 910, 100, 30);
+        yourselfBar2.setBounds(790, 910, 100, 30);
+        siblingsBar2.setBounds(1090, 910, 100, 30);
 
         parents.setActionCommand("questionParents");
         friends.setActionCommand("questionFriends");
@@ -72,32 +76,39 @@ public class mainFrame extends Frame {
         yourself.setActionCommand("questionYourself");
 
 
-        mainFrame f = new mainFrame();
-        JButton[] button = {parents, friends, siblings, teachers, coworkers, yourself};
-        JProgressBar[] progress = {parentsBar, friendsBar, siblingsBar, teachersBar, coworkersBar, yourselfBar};
-        JProgressBar[] progress2 = {parentsBar2, friendsBar2, siblingsBar2, teachersBar2, coworkersBar2, yourselfBar2};
+
+        JButton[] button = {parents, friends, teachers, coworkers, yourself, siblings};
+        JProgressBar[] progress = {parentsBar, friendsBar, teachersBar, coworkersBar, yourselfBar, siblingsBar};
+        JProgressBar[] progress2 = {parentsBar2, friendsBar2, teachersBar2, coworkersBar2, yourselfBar2, siblingsBar2};
         for (int i = 0; i <= 5; i++) {
             button[i].setBorderPainted(true);
             button[i].setFocusPainted(false);
             button[i].setContentAreaFilled(false);
-            f.add(button[i]);
+            this.add(button[i]);
             progress[i].setVisible(true);
             progress2[i].setVisible(true);
-            progress[i].setValue(10); //use base variable
+            progress[i].setValue(50); //use base variable
             progress2[i].setValue(0); //only increment if progress[i] value (above) is set to 100;
-            f.add(progress[i]);
-            f.add(progress2[i]);
+            this.add(progress[i]);
+            this.add(progress2[i]);
             System.out.println("Button " + button[i] + " formating completed.");
             System.out.println("test2222");
         }
 
+        this.repaint();
 
 
         parents.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("parentsQuestion");
-               questionFrame.askQuestion();
+
+               Question q = g.factions[g.parents].getQuestion();
+                g.activeQuestion = q;
+                qF.askQuestion();
+                qF.setVisible(true);
+
+
             }
         });
 
@@ -105,7 +116,7 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("friendsQuestion");
-                questionFrame.askQuestion();
+                qF.askQuestion();
             }
         });
 
@@ -113,7 +124,7 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("siblingsQuestion");
-                questionFrame.askQuestion();
+                qF.askQuestion();
             }
         });
 
@@ -121,7 +132,7 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("teachersQuestion");
-                questionFrame.askQuestion();
+                qF.askQuestion();
             }
         });
 
@@ -129,7 +140,7 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("coworkersQuestion");
-                questionFrame.askQuestion();
+                qF.askQuestion();
             }
         });
 
@@ -137,7 +148,7 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("yourselfQuestion");
-                questionFrame.askQuestion();
+                qF.askQuestion();
             }
         });
     }

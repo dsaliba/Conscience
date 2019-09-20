@@ -2,7 +2,7 @@
 
 public class Game {
     Faction[] factions;
-    static int
+    public static int
     parents = 0,
     friends = 1,
     teachers = 2,
@@ -12,6 +12,8 @@ public class Game {
 
     public int character;
     public int day;
+
+    public Question activeQuestion;
 
     public Game(){
         factions = new Faction[6];
@@ -38,8 +40,9 @@ public class Game {
 
 
     public static void main(String[] args) {
-        mainFrame.addElements();
-        Game g = new Game();
 
+        Game g = new Game();
+        mainFrame f = new mainFrame(g);
+        f.addElements();
     }
 }

@@ -40,7 +40,7 @@ public class Parser {
                     }else if (count == 9) { //Answer 2
                         second = s;
                     } else { //Results
-                        sR[count-9] = Integer.parseInt(s);
+                        sR[count-10] = Integer.parseInt(s);
                     }
                     count ++;
                 }

@@ -17,6 +17,9 @@ public class Faction {
     }
 
     public Question getQuestion(){
+        for (Question q : questions){
+            System.out.println(q.question);
+        }
         int i = (int) (Math.random() * this.questions.size());
         Question q = this.questions.get(i);
         this.questions.remove(i);
