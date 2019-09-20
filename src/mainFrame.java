@@ -24,6 +24,13 @@ public class mainFrame extends Frame {
 
     }
 
+    public void updateProgressBars (){
+        for (int i = 0; i < 6; i++){
+            int score = g.factions[i].score;
+
+        }
+    }
+
     public void addElements() {
         JButton parents = new JButton("Parents");
         JButton friends = new JButton("Friends");

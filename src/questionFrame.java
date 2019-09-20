@@ -29,8 +29,8 @@ public class questionFrame extends JFrame {
 
     public void askQuestion(){
 
-        JButton firstAnswer = new JButton("Insert Text Variable");
-        JButton secondAnswer = new JButton("Insert Text Variable2");
+        JButton firstAnswer = new JButton(g.activeQuestion.first);
+        JButton secondAnswer = new JButton(g.activeQuestion.second);
         System.out.println();
         JTextArea questionArea = new JTextArea(g.activeQuestion.question);
 
@@ -59,6 +59,7 @@ public class questionFrame extends JFrame {
         firstAnswer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                g.activeQuestion.answer(0, g);
              System.out.println("Answer 1");
              setVisible(false);
             }
@@ -68,6 +69,7 @@ public class questionFrame extends JFrame {
         secondAnswer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                g.activeQuestion.answer(1, g);
              System.out.println("Answer2");
              setVisible(false);
             }
