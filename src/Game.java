@@ -27,6 +27,15 @@ public class Game {
         this.day = 1;
     }
 
+    public void step(){
+        this.day ++;
+        for (Faction f : factions){
+            this.character += f.getIncome();
+        }
+
+        //UI REFRESH METHODS HERE
+    }
+
 
     public static void main(String[] args) {
         mainFrame.addElements();
