@@ -1,10 +1,57 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class mainFrame extends Frame {
     Game g;
     questionFrame qF;
+    JLabel background;
+
+
+    JButton parents = new JButton("Parents");
+    JButton friends = new JButton("Friends");
+    JButton siblings = new JButton("Siblings");
+    JButton teachers = new JButton("Teachers");
+    JButton coworkers = new JButton("Coworkers");
+    JButton yourself = new JButton("Yourself");
+
+    JProgressBar parentsBar = new JProgressBar();
+    JProgressBar friendsBar = new JProgressBar();
+    JProgressBar siblingsBar = new JProgressBar();
+    JProgressBar teachersBar = new JProgressBar();
+    JProgressBar coworkersBar = new JProgressBar();
+    JProgressBar yourselfBar = new JProgressBar();
+
+    JProgressBar parentsBar2 = new JProgressBar();
+    JProgressBar friendsBar2 = new JProgressBar();
+    JProgressBar siblingsBar2 = new JProgressBar();
+    JProgressBar teachersBar2 = new JProgressBar();
+    JProgressBar coworkersBar2 = new JProgressBar();
+    JProgressBar yourselfBar2 = new JProgressBar();
+
     mainFrame(Game g) {
         this.g = g;
         qF  = new questionFrame(this.g);
@@ -32,26 +79,7 @@ public class mainFrame extends Frame {
     }
 
     public void addElements() {
-        JButton parents = new JButton("Parents");
-        JButton friends = new JButton("Friends");
-        JButton siblings = new JButton("Siblings");
-        JButton teachers = new JButton("Teachers");
-        JButton coworkers = new JButton("Coworkers");
-        JButton yourself = new JButton("Yourself");
 
-        JProgressBar parentsBar = new JProgressBar();
-        JProgressBar friendsBar = new JProgressBar();
-        JProgressBar siblingsBar = new JProgressBar();
-        JProgressBar teachersBar = new JProgressBar();
-        JProgressBar coworkersBar = new JProgressBar();
-        JProgressBar yourselfBar = new JProgressBar();
-
-        JProgressBar parentsBar2 = new JProgressBar();
-        JProgressBar friendsBar2 = new JProgressBar();
-        JProgressBar siblingsBar2 = new JProgressBar();
-        JProgressBar teachersBar2 = new JProgressBar();
-        JProgressBar coworkersBar2 = new JProgressBar();
-        JProgressBar yourselfBar2 = new JProgressBar();
 
 
         parents.setBounds(490, 540, 100, 100);
@@ -90,20 +118,37 @@ public class mainFrame extends Frame {
         for (int i = 0; i <= 5; i++) {
             button[i].setBorderPainted(true);
             button[i].setFocusPainted(false);
-            button[i].setContentAreaFilled(false);
+            button[i].setContentAreaFilled(true);
+            button[i].setBackground(Color.WHITE);
             this.add(button[i]);
+            progress[i].setMaximum(10);
+            progress2[i].setMaximum(10);
+            progress[i].setStringPainted(true);
+            progress2[i].setStringPainted(true);
             progress[i].setVisible(true);
             progress2[i].setVisible(true);
-            progress[i].setValue(50); //use base variable
+            progress[i].setValue(5); //use base variable
             progress2[i].setValue(0); //only increment if progress[i] value (above) is set to 100;
             this.add(progress[i]);
             this.add(progress2[i]);
             System.out.println("Button " + button[i] + " formating completed.");
             System.out.println("test2222");
         }
-
+        this.setBackground(Color.DARK_GRAY);
         this.repaint();
+    try {
+        BufferedImage backgroundImage = null;
+        backgroundImage = ImageIO.read(
+                new File("Images\\Background.png"));
+        System.out.println("Get Image: " + backgroundImage);
+        System.out.println("Load image into frame");
 
+        background = new JLabel(new ImageIcon(backgroundImage));
+        this.add(background);
+        background.setVisible(true);
+    }catch (Exception exp){
+        System.out.println("Image not Working");
+        }
 
         parents.addActionListener(new ActionListener() {
             @Override
@@ -123,7 +168,11 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("friendsQuestion");
+
+                Question q = g.factions[g.friends].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
             }
         });
 
@@ -131,7 +180,10 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("siblingsQuestion");
+                Question q = g.factions[g.siblings].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
             }
         });
 
@@ -139,7 +191,10 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("teachersQuestion");
+                Question q = g.factions[g.teachers].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
             }
         });
 
@@ -147,7 +202,10 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("coworkersQuestion");
+                Question q = g.factions[g.peers].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
             }
         });
 
@@ -155,13 +213,50 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("yourselfQuestion");
+                Question q = g.factions[g.me].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
             }
         });
     }
 
+public void setProgress(String faction, int value){
+    switch(faction){
+        case "parents":
+            parentsBar.setValue(value);
+            break;
+        case "friends":
+            friendsBar.setValue(value);
+            break;
+        case "teachers":
+            teachersBar.setValue(value);
+            break;
+        case "coworkers":
+            coworkersBar.setValue(value);
+            break;
+        case "yourself":
+            yourselfBar.setValue(value);
+            break;
+        case "siblings":
+            siblingsBar.setValue(value);
+            break;
 
     }
+
+}
+
+public void addProgress(String faction, int add){
+
+
+}
+
+public void subProgress(String faction, int sub){
+
+}
+
+
+}
 
 
 
