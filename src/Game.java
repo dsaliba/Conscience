@@ -13,6 +13,8 @@ public class Game {
     public int character;
     public int day;
 
+    public mainFrame mF;
+
     public Question activeQuestion;
 
     public Game(){
@@ -35,7 +37,20 @@ public class Game {
             this.character += f.getIncome();
         }
 
-        //UI REFRESH METHODS HERE
+        this.update();
+
+        for (Faction f : factions) {
+            if (f.score < 1){
+                this.activeQuestion = f.getDeathQuestion();
+                mF.qF.askQuestion();
+                mF.qF.setVisible(true);
+                break;
+            }
+        }
+    }
+
+    public void update(){
+        mF.update();
     }
 
 
@@ -43,6 +58,7 @@ public class Game {
 
         Game g = new Game();
         mainFrame f = new mainFrame(g);
+        g.mF = f;
         f.addElements();
     }
 }

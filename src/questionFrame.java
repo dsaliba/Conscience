@@ -62,7 +62,7 @@ public class questionFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 g.activeQuestion.answer(0, g);
              System.out.println("Answer 1");
-             m.update();
+             g.step();
              setVisible(false);
             }
 
@@ -73,7 +73,7 @@ public class questionFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 g.activeQuestion.answer(1, g);
              System.out.println("Answer2");
-                m.update();
+                g.step();
              setVisible(false);
             }
         });

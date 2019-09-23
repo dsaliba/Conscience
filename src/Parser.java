@@ -36,7 +36,7 @@ public class Parser {
                     } else if (count == 2){ //Answer 1
                         first = s;
                     } else if (count < 9) { //Results
-                        sR[count-3] = Integer.parseInt(s);
+                        fR[count-3] = Integer.parseInt(s);
                     }else if (count == 9) { //Answer 2
                         second = s;
                     } else { //Results
