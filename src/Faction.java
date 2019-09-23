@@ -86,6 +86,7 @@ public class Faction {
                 q = "";
                 break;
         }
+
         return new Question(this.name, q, o1, o2, o1N, o2N, 50, 0);
     }
 

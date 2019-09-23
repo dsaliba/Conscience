@@ -6,11 +6,12 @@ import java.awt.event.ActionListener;
 public class questionFrame extends JFrame {
 
     Game g;
+    mainFrame m;
     //questionFrame q = new questionFrame(this.g);
 
-    public questionFrame(Game g){
+    public questionFrame(Game g, mainFrame m){
         this.g = g;
-
+        this.m = m;
 
         setSize(1000, 500);
         setLayout(null);
@@ -61,6 +62,7 @@ public class questionFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 g.activeQuestion.answer(0, g);
              System.out.println("Answer 1");
+             m.update();
              setVisible(false);
             }
 
@@ -71,6 +73,7 @@ public class questionFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 g.activeQuestion.answer(1, g);
              System.out.println("Answer2");
+                m.update();
              setVisible(false);
             }
         });
