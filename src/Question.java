@@ -35,9 +35,9 @@ public class Question {
 
     public boolean avialable(int a, Game g){
         if (a == 0){
-            return this.cost1 >= g.character;
+            return this.cost1 <= g.character;
         }else {
-            return this.cost2 >= g.character;
+            return this.cost2 <= g.character;
         }
     }
 

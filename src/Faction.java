@@ -51,14 +51,15 @@ public class Faction {
         String o1 = "";
         String o2 = "";
         String q = "";
+        int cost1 = 50;
         int [] o1N = new int[] {0, 0, 0, 0, 0, 0};
         int [] o2N = new int[] {0, 0, 0, 0, 0, 0};
         o1N[this.ind] = 3;
         switch(this.name){
             case "Parents":
-                o1 = "";
-                o2 = "";
-                q = "";
+                o1 = "Sit down and talk with them [" + cost1 + "]";
+                o2 = "Go to boot camp";
+                q = "You're parents are very concerned with your recent behavior...";
                 break;
             case "Friends":
                 o1 = "";
@@ -87,7 +88,7 @@ public class Faction {
                 break;
         }
 
-        return new Question(this.name, q, o1, o2, o1N, o2N, 50, 0);
+        return new Question(this.name, q, o1, o2, o1N, o2N, cost1, 0);
     }
 
 }

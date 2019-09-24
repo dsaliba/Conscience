@@ -5,7 +5,7 @@ import javax.swing.*;
 public class mainFrame extends Frame {
     Game g;
     questionFrame qF;
-
+    JButton[] button;
     JProgressBar[] progress;
     JProgressBar[] progress2;
 
@@ -29,7 +29,12 @@ public class mainFrame extends Frame {
 
     public void update(){
         this.updateProgressBars();
+        for (int i = 0; i < 6; i++){
+            button[i].setEnabled(g.enabledFactions[i]);
+        }
+
         this.repaint();
+
     }
 
     public void updateProgressBars (){
@@ -93,7 +98,7 @@ public class mainFrame extends Frame {
 
 
 
-        JButton[] button = {parents, friends, teachers, coworkers, yourself, siblings};
+        button = new JButton[]{parents, friends, teachers, coworkers, yourself, siblings};
         progress = new JProgressBar[]{parentsBar, friendsBar, teachersBar, coworkersBar, yourselfBar, siblingsBar};
         progress2 = new JProgressBar[]{parentsBar2, friendsBar2, teachersBar2, coworkersBar2, yourselfBar2, siblingsBar2};
         for (int i = 0; i <= 5; i++) {
@@ -123,6 +128,10 @@ public class mainFrame extends Frame {
                 g.activeQuestion = q;
                 qF.askQuestion();
                 qF.setVisible(true);
+                g.enabledFactions[g.lastFaction] = true;
+                g.lastFaction = g.parents;
+                g.enabledFactions[g.lastFaction] = false;
+
 
 
             }
@@ -132,7 +141,14 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("friendsQuestion");
+                Question q = g.factions[g.friends].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
+                g.enabledFactions[g.lastFaction] = true;
+                g.lastFaction = g.friends;
+                g.enabledFactions[g.lastFaction] = false;
+
             }
         });
 
@@ -140,7 +156,13 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("siblingsQuestion");
+                Question q = g.factions[g.siblings].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
+                g.enabledFactions[g.lastFaction] = true;
+                g.lastFaction = g.siblings;
+                g.enabledFactions[g.lastFaction] = false;
             }
         });
 
@@ -148,7 +170,13 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("teachersQuestion");
+                Question q = g.factions[g.teachers].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
+                g.enabledFactions[g.lastFaction] = true;
+                g.lastFaction = g.teachers;
+                g.enabledFactions[g.lastFaction] = false;
             }
         });
 
@@ -156,7 +184,13 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("coworkersQuestion");
+                Question q = g.factions[g.peers].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
+                g.enabledFactions[g.lastFaction] = true;
+                g.lastFaction = g.peers;
+                g.enabledFactions[g.lastFaction] = false;
             }
         });
 
@@ -164,9 +198,21 @@ public class mainFrame extends Frame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("yourselfQuestion");
+                Question q = g.factions[g.me].getQuestion();
+                g.activeQuestion = q;
                 qF.askQuestion();
+                qF.setVisible(true);
+                g.enabledFactions[g.lastFaction] = true;
+                g.lastFaction = g.me;
+                g.enabledFactions[g.lastFaction] = false;
             }
         });
+    }
+
+    public void askQuestion(){
+        qF.askQuestion();
+        qF.setVisible(true);
+        System.out.println("testtesttest3");
     }
 
 

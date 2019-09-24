@@ -10,6 +10,9 @@ public class Game {
     me = 4,
             siblings = 5;
 
+    boolean[] enabledFactions;
+    public int lastFaction;
+
     public int character;
     public int day;
 
@@ -29,6 +32,11 @@ public class Game {
         p.parse(this);
         this.character = 500;
         this.day = 1;
+        enabledFactions = new boolean[6];
+        lastFaction = 0;
+        for (int i = 0; i < 6; i++){
+            enabledFactions[i] = true;
+        }
     }
 
     public void step(){
@@ -42,8 +50,8 @@ public class Game {
         for (Faction f : factions) {
             if (f.score < 1){
                 this.activeQuestion = f.getDeathQuestion();
-                mF.qF.askQuestion();
-                mF.qF.setVisible(true);
+                System.out.println(this.activeQuestion.question);
+                mF.askQuestion();
                 break;
             }
         }

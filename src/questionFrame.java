@@ -7,6 +7,10 @@ public class questionFrame extends JFrame {
 
     Game g;
     mainFrame m;
+
+    public JButton firstAnswer;
+    public JButton secondAnswer;
+    public JTextArea questionArea;
     //questionFrame q = new questionFrame(this.g);
 
     public questionFrame(Game g, mainFrame m){
@@ -26,14 +30,16 @@ public class questionFrame extends JFrame {
                 System.exit(0);
             }
         });
+        firstAnswer = new JButton();
+        secondAnswer = new JButton();
+        questionArea = new JTextArea();
     }
 
     public void askQuestion(){
 
-        JButton firstAnswer = new JButton(g.activeQuestion.first);
-        JButton secondAnswer = new JButton(g.activeQuestion.second);
-        System.out.println();
-        JTextArea questionArea = new JTextArea(g.activeQuestion.question);
+        firstAnswer.setText(g.activeQuestion.first);
+        secondAnswer.setText(g.activeQuestion.second);
+        questionArea.setText(g.activeQuestion.question);
 
         Font questionFont = new Font("Ariel", Font.BOLD, 20);
 
@@ -51,33 +57,44 @@ public class questionFrame extends JFrame {
         secondAnswer.setFocusPainted(true);
         secondAnswer.setContentAreaFilled(false);
 
-        firstAnswer.setVisible(true);
-        secondAnswer.setVisible(true);
+        firstAnswer.setEnabled(g.activeQuestion.avialable(0, g));
+        secondAnswer.setEnabled(g.activeQuestion.avialable(1, g));
+
         this.add(firstAnswer);
         this.add(secondAnswer);
         this.add(questionArea);
-
+        for (ActionListener a : firstAnswer.getActionListeners()){
+            firstAnswer.removeActionListener(a);
+        }
         firstAnswer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 g.activeQuestion.answer(0, g);
              System.out.println("Answer 1");
-             g.step();
              setVisible(false);
+                g.step();
             }
 
         });
-
+        for (ActionListener a : secondAnswer.getActionListeners()){
+            secondAnswer.removeActionListener(a);
+        }
         secondAnswer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 g.activeQuestion.answer(1, g);
              System.out.println("Answer2");
-                g.step();
+
              setVisible(false);
+                g.step();
             }
         });
+        System.out.println(g.activeQuestion.question);
 
+        firstAnswer.setVisible(true);
+        secondAnswer.setVisible(true);
+        questionArea.setVisible(true);
+        this.repaint();
 
     }
 }
