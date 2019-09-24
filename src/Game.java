@@ -44,6 +44,7 @@ public class Game {
         for (Faction f : factions){
             this.character += f.getIncome();
         }
+        this.character -= 10;
 
         this.update();
 
