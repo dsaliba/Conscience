@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 public class mainFrame extends Frame {
     Game g;
     questionFrame qF;
+
     JLabel background;
 
 
@@ -52,10 +53,14 @@ public class mainFrame extends Frame {
     JProgressBar coworkersBar2 = new JProgressBar();
     JProgressBar yourselfBar2 = new JProgressBar();
 
+
+    JProgressBar[] progress;
+    JProgressBar[] progress2;
+
+
     mainFrame(Game g) {
         this.g = g;
-        qF  = new questionFrame(this.g);
-
+        qF  = new questionFrame(this.g, this);
 
         setSize(1800, 1000);
         setLayout(null);
@@ -71,10 +76,16 @@ public class mainFrame extends Frame {
 
     }
 
+    public void update(){
+        this.updateProgressBars();
+        this.repaint();
+    }
+
     public void updateProgressBars (){
         for (int i = 0; i < 6; i++){
             int score = g.factions[i].score;
-
+            this.progress[i].setValue(10 * ((score>10?10:score)));
+            this.progress2[i].setValue(10 * (score<10?0:(score-10)));
         }
     }
 
@@ -113,8 +124,8 @@ public class mainFrame extends Frame {
 
 
         JButton[] button = {parents, friends, teachers, coworkers, yourself, siblings};
-        JProgressBar[] progress = {parentsBar, friendsBar, teachersBar, coworkersBar, yourselfBar, siblingsBar};
-        JProgressBar[] progress2 = {parentsBar2, friendsBar2, teachersBar2, coworkersBar2, yourselfBar2, siblingsBar2};
+        progress = new JProgressBar[]{parentsBar, friendsBar, teachersBar, coworkersBar, yourselfBar, siblingsBar};
+        progress2 = new JProgressBar[]{parentsBar2, friendsBar2, teachersBar2, coworkersBar2, yourselfBar2, siblingsBar2};
         for (int i = 0; i <= 5; i++) {
             button[i].setBorderPainted(true);
             button[i].setFocusPainted(false);
