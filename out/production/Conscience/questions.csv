@@ -1,2 +1,6 @@
 Faction,Prompt,First Choice,Parent Score,Friend Score,Teacher Score,Coluege Score,Me Score,Sibiling Score,Second Choice,Parent Score,Friend Score,Teacher Score,Coluege Score,Me Score,Sibiling Score
-Parents,Youre Friends want you to go out on a school night but you still have homework,Go out with friends,-1,2,-1,0,0,0,Stay Home and do work,0,-1,1,0,0,0
+Friends,Your Friends want you to go out on a school night but you still have homework,Go out with friends,-1,2,-1,0,0,0,Stay Home and do work,0,-1,1,0,0,0
+Teachers,Your Teacher wants you to skip sports practice to take a makeup quiz,Skip practice,0,0,1,-1,0,0,Go to practice,0,0,-1,1,0,0
+Parents,You make plans to go out with friends but remember your parents already planned a family dinner,Bail on friends,1,-2,0,0,0,1,Bail on family,-2,1,0,0,0,1
+Me,You feel like you may be getting sick but you have 2 tests today,Skip school,0,0,-2,0,2,0,Tough it out,0,0,1,0,-1,0
+Sibilings,Your parents are mad at your sibiling because they snuck out last night,Side with parents,1,0,0,0,0,-2,,,,,,,

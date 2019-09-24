@@ -46,6 +46,13 @@ public class mainFrame extends Frame {
     }
 
     public void addElements() {
+        JLabel character = new JLabel();
+        Font characterFont = new Font("Ariel", Font.BOLD, 50);
+        character.setFont(characterFont);
+        character.setBounds(50, 0, 700, 200);
+        character.setText(g.character+"");
+        this.add(character);
+
         JButton parents = new JButton("Parents");
         JButton friends = new JButton("Friends");
         JButton siblings = new JButton("Siblings");
@@ -116,7 +123,9 @@ public class mainFrame extends Frame {
             System.out.println("test2222");
         }
 
+
         this.repaint();
+
 
 
         parents.addActionListener(new ActionListener() {
