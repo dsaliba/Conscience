@@ -46,7 +46,7 @@ public class Game {
         }
         this.character -= 10;
 
-        this.update();
+
 
         for (Faction f : factions) {
             if (f.score < 1){
@@ -56,10 +56,12 @@ public class Game {
                 break;
             }
         }
+        this.update();
     }
 
     public void update(){
         mF.update();
+
     }
 
 

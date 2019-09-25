@@ -1,8 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class mainFrame extends Frame {
@@ -11,12 +8,12 @@ public class mainFrame extends Frame {
     JButton[] button;
     JProgressBar[] progress;
     JProgressBar[] progress2;
-
+    JLabel character = new JLabel();
 
     mainFrame(Game g) {
         this.g = g;
         qF = new questionFrame(this.g, this);
-
+        qF.setBackground(Color.DARK_GRAY);
         setSize(1800, 1000);
         setLayout(null);
         setVisible(true);
@@ -38,8 +35,9 @@ public class mainFrame extends Frame {
         for (int i = 0; i < 6; i++) {
             button[i].setEnabled(g.enabledFactions[i]);
         }
-
+        character.setText(g.character + "");
         this.repaint();
+
 
     }
 
@@ -54,7 +52,7 @@ public class mainFrame extends Frame {
     public void addElements() {
 
 
-        JLabel character = new JLabel();
+
         Font characterFont = new Font("Ariel", Font.BOLD, 50);
         character.setFont(characterFont);
         character.setForeground(Color.WHITE);
@@ -133,6 +131,7 @@ public class mainFrame extends Frame {
             progress2[i].setVisible(true);
             progress[i].setStringPainted(true);
             progress2[i].setStringPainted(true);
+            progress2[i].setForeground(Color.green);
 
             progress[i].setValue(50); //use base variable
             progress2[i].setValue(0); //only increment if progress[i] value (above) is set to 100;
