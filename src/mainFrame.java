@@ -1,5 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class mainFrame extends Frame {
@@ -9,13 +12,16 @@ public class mainFrame extends Frame {
     JProgressBar[] progress;
     JProgressBar[] progress2;
 
+
     mainFrame(Game g) {
         this.g = g;
-        qF  = new questionFrame(this.g, this);
+        qF = new questionFrame(this.g, this);
 
         setSize(1800, 1000);
         setLayout(null);
         setVisible(true);
+        setBackground(Color.DARK_GRAY);
+
         System.out.println("Main Frame... Launched");
 
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -27,9 +33,9 @@ public class mainFrame extends Frame {
 
     }
 
-    public void update(){
+    public void update() {
         this.updateProgressBars();
-        for (int i = 0; i < 6; i++){
+        for (int i = 0; i < 6; i++) {
             button[i].setEnabled(g.enabledFactions[i]);
         }
 
@@ -37,28 +43,38 @@ public class mainFrame extends Frame {
 
     }
 
-    public void updateProgressBars (){
-        for (int i = 0; i < 6; i++){
+    public void updateProgressBars() {
+        for (int i = 0; i < 6; i++) {
             int score = g.factions[i].score;
-            this.progress[i].setValue(10 * ((score>10?10:score)));
-            this.progress2[i].setValue(10 * (score<10?0:(score-10)));
+            this.progress[i].setValue(10 * ((score > 10 ? 10 : score)));
+            this.progress2[i].setValue(10 * (score < 10 ? 0 : (score - 10)));
         }
     }
 
     public void addElements() {
+
+
         JLabel character = new JLabel();
         Font characterFont = new Font("Ariel", Font.BOLD, 50);
         character.setFont(characterFont);
+        character.setForeground(Color.WHITE);
         character.setBounds(50, 0, 700, 200);
-        character.setText(g.character+"");
+        character.setText(g.character + "");
         this.add(character);
 
-        JButton parents = new JButton("Parents");
-        JButton friends = new JButton("Friends");
-        JButton siblings = new JButton("Siblings");
-        JButton teachers = new JButton("Teachers");
-        JButton coworkers = new JButton("Coworkers");
-        JButton yourself = new JButton("Yourself");
+        JLabel title = new JLabel("Morality");
+        title.setForeground(Color.WHITE);
+        Font titleFont = new Font("Ariel", Font.BOLD, 200);
+        title.setFont(titleFont);
+        title.setBounds(450, 200, 1000, 250);
+        this.add(title);
+
+        JButton parents = new JButton("");
+        JButton friends = new JButton("");
+        JButton siblings = new JButton("");
+        JButton teachers = new JButton("");
+        JButton coworkers = new JButton("");
+        JButton yourself = new JButton("");
 
         JProgressBar parentsBar = new JProgressBar();
         JProgressBar friendsBar = new JProgressBar();
@@ -104,128 +120,140 @@ public class mainFrame extends Frame {
         yourself.setActionCommand("questionYourself");
 
 
-
         button = new JButton[]{parents, friends, teachers, coworkers, yourself, siblings};
         progress = new JProgressBar[]{parentsBar, friendsBar, teachersBar, coworkersBar, yourselfBar, siblingsBar};
         progress2 = new JProgressBar[]{parentsBar2, friendsBar2, teachersBar2, coworkersBar2, yourselfBar2, siblingsBar2};
         for (int i = 0; i <= 5; i++) {
             button[i].setBorderPainted(true);
             button[i].setFocusPainted(false);
-            button[i].setContentAreaFilled(false);
+            button[i].setContentAreaFilled(true);
+            button[i].setBackground(Color.WHITE);
             this.add(button[i]);
             progress[i].setVisible(true);
             progress2[i].setVisible(true);
+            progress[i].setStringPainted(true);
+            progress2[i].setStringPainted(true);
+
             progress[i].setValue(50); //use base variable
             progress2[i].setValue(0); //only increment if progress[i] value (above) is set to 100;
             this.add(progress[i]);
             this.add(progress2[i]);
             System.out.println("Button " + button[i] + " formating completed.");
             System.out.println("test2222");
+            repaint();
+
+            button[0].setIcon(new ImageIcon("Images\\parents.png"));
+            button[1].setIcon(new ImageIcon("Images\\friends.png"));
+            button[2].setIcon(new ImageIcon("Images\\teacher.png"));
+            button[3].setIcon(new ImageIcon("Images\\peers.png"));
+            button[4].setIcon(new ImageIcon("Images\\yourself.png"));
+            button[5].setIcon(new ImageIcon("Images\\siblings.png"));
+
+
+            parents.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("parentsQuestion");
+
+                    Question q = g.factions[g.parents].getQuestion();
+                    g.activeQuestion = q;
+                    qF.askQuestion();
+                    qF.setVisible(true);
+                    g.enabledFactions[g.lastFaction] = true;
+                    g.lastFaction = g.parents;
+                    g.enabledFactions[g.lastFaction] = false;
+                    qF.setBackground(Color.DARK_GRAY);
+
+
+                }
+            });
+
+            friends.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("friendsQuestion");
+                    Question q = g.factions[g.friends].getQuestion();
+                    g.activeQuestion = q;
+                    qF.askQuestion();
+                    qF.setVisible(true);
+                    g.enabledFactions[g.lastFaction] = true;
+                    g.lastFaction = g.friends;
+                    g.enabledFactions[g.lastFaction] = false;
+                    qF.setBackground(Color.DARK_GRAY);
+                }
+            });
+
+            siblings.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("siblingsQuestion");
+                    Question q = g.factions[g.siblings].getQuestion();
+                    g.activeQuestion = q;
+                    qF.askQuestion();
+                    qF.setVisible(true);
+                    g.enabledFactions[g.lastFaction] = true;
+                    g.lastFaction = g.siblings;
+                    g.enabledFactions[g.lastFaction] = false;
+                    qF.setBackground(Color.DARK_GRAY);
+                }
+            });
+
+            teachers.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("teachersQuestion");
+                    Question q = g.factions[g.teachers].getQuestion();
+                    g.activeQuestion = q;
+                    qF.askQuestion();
+                    qF.setVisible(true);
+                    g.enabledFactions[g.lastFaction] = true;
+                    g.lastFaction = g.teachers;
+                    g.enabledFactions[g.lastFaction] = false;
+                    qF.setBackground(Color.DARK_GRAY);
+                }
+            });
+
+            coworkers.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("coworkersQuestion");
+                    Question q = g.factions[g.peers].getQuestion();
+                    g.activeQuestion = q;
+                    qF.askQuestion();
+                    qF.setVisible(true);
+                    g.enabledFactions[g.lastFaction] = true;
+                    g.lastFaction = g.peers;
+                    g.enabledFactions[g.lastFaction] = false;
+                    qF.setBackground(Color.DARK_GRAY);
+                }
+            });
+
+            yourself.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("yourselfQuestion");
+                    Question q = g.factions[g.me].getQuestion();
+                    g.activeQuestion = q;
+                    qF.askQuestion();
+                    qF.setVisible(true);
+                    g.enabledFactions[g.lastFaction] = true;
+                    g.lastFaction = g.me;
+                    g.enabledFactions[g.lastFaction] = false;
+                    qF.setBackground(Color.DARK_GRAY);
+                }
+            });
+        }
+    }
+
+        public void askQuestion () {
+            qF.askQuestion();
+            qF.setVisible(true);
+            System.out.println("ara ara ara");
         }
 
 
-        this.repaint();
-
-
-
-        parents.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("parentsQuestion");
-
-               Question q = g.factions[g.parents].getQuestion();
-                g.activeQuestion = q;
-                qF.askQuestion();
-                qF.setVisible(true);
-                g.enabledFactions[g.lastFaction] = true;
-                g.lastFaction = g.parents;
-                g.enabledFactions[g.lastFaction] = false;
-
-
-
-            }
-        });
-
-        friends.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("friendsQuestion");
-                Question q = g.factions[g.friends].getQuestion();
-                g.activeQuestion = q;
-                qF.askQuestion();
-                qF.setVisible(true);
-                g.enabledFactions[g.lastFaction] = true;
-                g.lastFaction = g.friends;
-                g.enabledFactions[g.lastFaction] = false;
-
-            }
-        });
-
-        siblings.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("siblingsQuestion");
-                Question q = g.factions[g.siblings].getQuestion();
-                g.activeQuestion = q;
-                qF.askQuestion();
-                qF.setVisible(true);
-                g.enabledFactions[g.lastFaction] = true;
-                g.lastFaction = g.siblings;
-                g.enabledFactions[g.lastFaction] = false;
-            }
-        });
-
-        teachers.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("teachersQuestion");
-                Question q = g.factions[g.teachers].getQuestion();
-                g.activeQuestion = q;
-                qF.askQuestion();
-                qF.setVisible(true);
-                g.enabledFactions[g.lastFaction] = true;
-                g.lastFaction = g.teachers;
-                g.enabledFactions[g.lastFaction] = false;
-            }
-        });
-
-        coworkers.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("coworkersQuestion");
-                Question q = g.factions[g.peers].getQuestion();
-                g.activeQuestion = q;
-                qF.askQuestion();
-                qF.setVisible(true);
-                g.enabledFactions[g.lastFaction] = true;
-                g.lastFaction = g.peers;
-                g.enabledFactions[g.lastFaction] = false;
-            }
-        });
-
-        yourself.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("yourselfQuestion");
-                Question q = g.factions[g.me].getQuestion();
-                g.activeQuestion = q;
-                qF.askQuestion();
-                qF.setVisible(true);
-                g.enabledFactions[g.lastFaction] = true;
-                g.lastFaction = g.me;
-                g.enabledFactions[g.lastFaction] = false;
-            }
-        });
     }
 
-    public void askQuestion(){
-        qF.askQuestion();
-        qF.setVisible(true);
-        System.out.println("testtesttest3");
-    }
-
-
-    }
 
 
 

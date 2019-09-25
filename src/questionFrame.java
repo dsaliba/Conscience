@@ -17,6 +17,8 @@ public class questionFrame extends JFrame {
         this.g = g;
         this.m = m;
 
+
+
         setSize(1000, 500);
         setLayout(null);
         setAlwaysOnTop (true);
@@ -36,6 +38,8 @@ public class questionFrame extends JFrame {
     }
 
     public void askQuestion(){
+
+
 
         firstAnswer.setText(g.activeQuestion.first);
         secondAnswer.setText(g.activeQuestion.second);
@@ -59,6 +63,7 @@ public class questionFrame extends JFrame {
 
         firstAnswer.setEnabled(g.activeQuestion.avialable(0, g));
         secondAnswer.setEnabled(g.activeQuestion.avialable(1, g));
+
 
         this.add(firstAnswer);
         this.add(secondAnswer);
