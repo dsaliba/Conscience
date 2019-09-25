@@ -144,7 +144,7 @@ public class mainFrame extends Frame {
 
             button[0].setIcon(new ImageIcon("Images\\parents.png"));
             button[1].setIcon(new ImageIcon("Images\\friends.png"));
-            button[2].setIcon(new ImageIcon("Images\\teacher.png"));
+            button[2].setIcon(new ImageIcon("Images\\teachers.png"));
             button[3].setIcon(new ImageIcon("Images\\peers.png"));
             button[4].setIcon(new ImageIcon("Images\\yourself.png"));
             button[5].setIcon(new ImageIcon("Images\\siblings.png"));

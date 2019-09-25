@@ -49,7 +49,7 @@ public class questionFrame extends JFrame {
 
         questionArea.setEditable(false);
         questionArea.setFont(questionFont);
-
+        questionArea.setLineWrap(true);
         questionArea.setBounds(100, 100, 750,200);
         firstAnswer.setBounds(100, 300, 300, 100);
         secondAnswer.setBounds(550, 300, 300, 100);
