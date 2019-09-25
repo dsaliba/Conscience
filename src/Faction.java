@@ -62,29 +62,29 @@ public class Faction {
                 q = "You're parents are very concerned with your recent behavior...";
                 break;
             case "Friends":
-                o1 = "";
-                o2 = "";
-                q = "";
+                o1 = "Take time to meet with them [" + cost1 + "]";
+                o2 = "Ignore them and risk your friendship";
+                q = "Your friends are mad at you and want to talk to you about your group's future";
                 break;
             case "Teachers":
-                o1 = "";
-                o2 = "";
-                q = "";
+                o1 = "Talk to them after school [" + cost1 + "]";
+                o2 = "Too relatable so you decide to not meet them";
+                q = "Your grades are all F's, besides computer science and theology where you get all A's, so your teachers want to talk with you and your parents";
                 break;
             case "Peers":
-                o1 = "";
-                o2 = "";
-                q = "";
+                o1 = "Start contributing to the projects [" + cost1 + "]";
+                o2 = "Yeet them across the room and don't care if they snitch, because snitches get stitches";
+                q = "Your Peers see that you are not contributing enough work so they are threatening to tell the teachers unless you start participating more.";
                 break;
             case "Me":
-                o1 = "";
-                o2 = "";
-                q = "";
+                o1 = "Take a breather to give some time to yourself over the weekend [" + cost1 + "]";
+                o2 = "Ignore your stress, it can wait";
+                q = "You start to feel bad about your choices and get super stressed";
                 break;
             case "Sibilings":
-                o1 = "";
-                o2 = "";
-                q = "";
+                o1 = "Talk to them about how you can be a better sibling [" + cost1 + "]";
+                o2 = "Lock them in the closet and let them starve while your parents are gone";
+                q = "Your siblings are mad at you because you haven't been  respectful towards them";
                 break;
         }
 
